@@ -1,0 +1,6 @@
+../TouchGFX/gui/src/model/Model.cpp:4:1:Model::Model()	1
+../TouchGFX/gui/src/model/Model.cpp:9:6:void Model::tick()	3
+../TouchGFX/gui/src/model/Model.cpp:28:6:void Model::updateGauge(int)	2
+../TouchGFX/gui/src/model/Model.cpp:35:6:void Model::setGaugeValue(int)	1
+../TouchGFX/gui/src/model/Model.cpp:38:1:void __static_initialization_and_destruction_0()	1
+../TouchGFX/gui/src/model/Model.cpp:38:1:cpp)	1
