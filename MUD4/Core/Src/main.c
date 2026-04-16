@@ -203,7 +203,7 @@ int main(void)
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_MspInit(&htim9);
+  //HAL_TIM_PWM_MspInit(&htim9);
 
   HAL_UART_Receive_IT(&huart2, &rx2Byte[0], 2);// вызов первый раз для запуска иначе нет
   /* USER CODE END 2 */

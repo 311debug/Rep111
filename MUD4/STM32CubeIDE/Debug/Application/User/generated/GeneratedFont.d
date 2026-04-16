@@ -1,5 +1,5 @@
 Application/User/generated/GeneratedFont.o: \
- C:/INSTALL/TouchGFXProjects/MUD4/TouchGFX/generated/fonts/src/GeneratedFont.cpp \
+ C:/INSTALL/Rep111/MUD4/TouchGFX/generated/fonts/src/GeneratedFont.cpp \
  ../../TouchGFX/generated/fonts/include/fonts/GeneratedFont.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/ConstFont.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Font.hpp \

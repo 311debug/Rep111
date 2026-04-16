@@ -1,6 +1,6 @@
 #include <gui/screen1_screen/Screen1View.hpp>
 Screen1View* screen1ViewPtr = nullptr;
-extern volatile uint16_t g_duty_percent;
+extern volatile int g_duty_percent;
 //static Unicode::UnicodeChar textArea1Buffer[10];
 Screen1View::Screen1View()
 {
