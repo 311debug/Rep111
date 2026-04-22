@@ -13009,6 +13009,7 @@ Name             Origin             Length             Attributes
 CCMRAM           0x10000000         0x00010000         xrw
 RAM              0x20000000         0x00030000         xrw
 FLASH            0x08000000         0x00200000         xr
+SDRAM            0xd0000000         0x00800000         rw
 *default*        0x00000000         0xffffffff
 
 Linker script and memory map
@@ -18836,6 +18837,13 @@ TouchGFX_ScratchbufferA
  *fill*         0x200848a0      0xa00 
                 0x200852a0                        . = ALIGN (0x8)
 
+.TouchGFX_Framebuffer
+                0xd0000000        0x0
+                0xd0000000                        . = ALIGN (0x4)
+ *(.TouchGFX_Framebuffer)
+ *(.TouchGFX_Framebuffer*)
+                0xd0000000                        . = ALIGN (0x4)
+
 /DISCARD/
  libc.a(*)
  libm.a(*)
@@ -19799,156 +19807,156 @@ LOAD D:/ST/STM32CubeIDE_2.1.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_macro   0x0000e796      0x83a ./TouchGFX/target/generated/TouchGFXConfiguration.o
  .debug_macro   0x0000efd0      0x882 ./TouchGFX/target/generated/TouchGFXGeneratedHAL.o
 
-.debug_line     0x00000000    0x4341e
+.debug_line     0x00000000    0x43414
  .debug_line    0x00000000     0x104d ./Core/Src/main.o
  .debug_line    0x0000104d      0xc09 ./Core/Src/stm32f4xx_hal_msp.o
  .debug_line    0x00001c56      0x8a2 ./Core/Src/stm32f4xx_hal_timebase_tim.o
  .debug_line    0x000024f8      0xa2e ./Core/Src/stm32f4xx_it.o
- .debug_line    0x00002f26      0x8b6 ./Core/Src/syscalls.o
- .debug_line    0x000037dc      0x592 ./Core/Src/sysmem.o
- .debug_line    0x00003d6e      0x8af ./Core/Src/system_stm32f4xx.o
- .debug_line    0x0000461d       0x7a ./Core/Startup/startup_stm32f429zitx.o
- .debug_line    0x00004697      0x59f ./Drivers/BSP/Components/ili9341/ili9341.o
- .debug_line    0x00004c36      0x960 ./Drivers/BSP/Components/stmpe811/stmpe811.o
- .debug_line    0x00005596      0xb4f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_line    0x000060e5      0xde6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_line    0x00006ecb      0x94b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.o
- .debug_line    0x00007816     0x1082 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
- .debug_line    0x00008898     0x123e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.o
- .debug_line    0x00009ad6      0xc93 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_line    0x0000a769     0x3bc3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
- .debug_line    0x0000e32c      0x89f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o
- .debug_line    0x0000ebcb     0x1426 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.o
- .debug_line    0x0000fff1      0xa83 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
- .debug_line    0x00010a74      0xf25 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_line    0x00011999      0xd6e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_line    0x00012707      0xe21 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.o
- .debug_line    0x00013528     0x1db1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
- .debug_line    0x000152d9     0x3891 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_line    0x00018b6a     0x1a76 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_line    0x0001a5e0     0x265e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_line    0x0001cc3e      0xd0b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.o
- .debug_line    0x0001d949     0x25fa ./Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.o
- .debug_line    0x0001ff43      0x791 ./Middlewares/Third_Party/FreeRTOS/Source/list.o
- .debug_line    0x000206d4     0x1725 ./Middlewares/Third_Party/FreeRTOS/Source/queue.o
- .debug_line    0x00021df9     0x1ded ./Middlewares/Third_Party/FreeRTOS/Source/tasks.o
- .debug_line    0x00023be6      0xdff ./Middlewares/Third_Party/FreeRTOS/Source/timers.o
- .debug_line    0x000249e5      0x812 ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
- .debug_line    0x000251f7      0x9a8 ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
- .debug_line    0x00025b9f       0xac ./TouchGFX/App/app_touchgfx.o
- .debug_line    0x00025c4b      0x770 ./TouchGFX/generated/fonts/src/ApplicationFontProvider.o
- .debug_line    0x000263bb      0x9f5 ./TouchGFX/generated/fonts/src/CachedFont.o
- .debug_line    0x00026db0      0xf57 ./TouchGFX/generated/fonts/src/CompressedFontCache.o
- .debug_line    0x00027d07     0x14c1 ./TouchGFX/generated/fonts/src/FontCache.o
- .debug_line    0x000291c8      0x56b ./TouchGFX/generated/fonts/src/Font_verdana_10_4bpp_0.o
- .debug_line    0x00029733      0x56b ./TouchGFX/generated/fonts/src/Font_verdana_20_4bpp_0.o
- .debug_line    0x00029c9e      0x56b ./TouchGFX/generated/fonts/src/Font_verdana_40_4bpp_0.o
- .debug_line    0x0002a209     0x13c7 ./TouchGFX/generated/fonts/src/GeneratedFont.o
- .debug_line    0x0002b5d0      0x5d7 ./TouchGFX/generated/fonts/src/Kerning_verdana_10_4bpp.o
- .debug_line    0x0002bba7      0x5d7 ./TouchGFX/generated/fonts/src/Kerning_verdana_20_4bpp.o
- .debug_line    0x0002c17e      0x5d7 ./TouchGFX/generated/fonts/src/Kerning_verdana_40_4bpp.o
- .debug_line    0x0002c755      0x71c ./TouchGFX/generated/fonts/src/Table_verdana_10_4bpp.o
- .debug_line    0x0002ce71      0x71c ./TouchGFX/generated/fonts/src/Table_verdana_20_4bpp.o
- .debug_line    0x0002d58d      0x71c ./TouchGFX/generated/fonts/src/Table_verdana_40_4bpp.o
- .debug_line    0x0002dca9      0x74f ./TouchGFX/generated/fonts/src/VectorFontRendererBuffers.o
- .debug_line    0x0002e3f8     0x1de7 ./TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.o
- .debug_line    0x000301df     0x25f0 ./TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.o
- .debug_line    0x000327cf      0x618 ./TouchGFX/generated/images/src/BitmapDatabase.o
- .debug_line    0x00032de7       0xeb ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_action.o
- .debug_line    0x00032ed2       0xeb ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_normal.o
- .debug_line    0x00032fbd       0xec ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_pressed.o
- .debug_line    0x000330a9       0xde ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_backgrounds_active.o
- .debug_line    0x00033187       0xda ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_needles_smooth.o
- .debug_line    0x00033261      0x5b0 ./TouchGFX/generated/texts/src/LanguageGb.o
- .debug_line    0x00033811      0xfd5 ./TouchGFX/generated/texts/src/Texts.o
- .debug_line    0x000347e6      0x76e ./TouchGFX/generated/texts/src/TypedTextDatabase.o
- .debug_line    0x00034f54     0x146f ./TouchGFX/gui/src/common/FrontendApplication.o
- .debug_line    0x000363c3      0x669 ./TouchGFX/gui/src/model/Model.o
- .debug_line    0x00036a2c     0x166c ./TouchGFX/gui/src/screen1_screen/Screen1Presenter.o
- .debug_line    0x00038098     0x164f ./TouchGFX/gui/src/screen1_screen/Screen1View.o
- .debug_line    0x000396e7      0x857 ./TouchGFX/target/STM32TouchController.o
- .debug_line    0x00039f3e      0x9c3 ./TouchGFX/target/TouchGFXGPIO.o
- .debug_line    0x0003a901     0x14a9 ./TouchGFX/target/TouchGFXHAL.o
- .debug_line    0x0003bdaa      0xd59 ./TouchGFX/target/generated/OSWrappers.o
- .debug_line    0x0003cb03     0x16b7 ./TouchGFX/target/generated/STM32DMA.o
- .debug_line    0x0003e1ba     0x2784 ./TouchGFX/target/generated/TouchGFXConfiguration.o
- .debug_line    0x0004093e     0x2ae0 ./TouchGFX/target/generated/TouchGFXGeneratedHAL.o
+ .debug_line    0x00002f26      0x8b1 ./Core/Src/syscalls.o
+ .debug_line    0x000037d7      0x58d ./Core/Src/sysmem.o
+ .debug_line    0x00003d64      0x8af ./Core/Src/system_stm32f4xx.o
+ .debug_line    0x00004613       0x7a ./Core/Startup/startup_stm32f429zitx.o
+ .debug_line    0x0000468d      0x59f ./Drivers/BSP/Components/ili9341/ili9341.o
+ .debug_line    0x00004c2c      0x960 ./Drivers/BSP/Components/stmpe811/stmpe811.o
+ .debug_line    0x0000558c      0xb4f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_line    0x000060db      0xde6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_line    0x00006ec1      0x94b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.o
+ .debug_line    0x0000780c     0x1082 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+ .debug_line    0x0000888e     0x123e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.o
+ .debug_line    0x00009acc      0xc93 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_line    0x0000a75f     0x3bc3 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
+ .debug_line    0x0000e322      0x89f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o
+ .debug_line    0x0000ebc1     0x1426 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.o
+ .debug_line    0x0000ffe7      0xa83 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
+ .debug_line    0x00010a6a      0xf25 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_line    0x0001198f      0xd6e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_line    0x000126fd      0xe21 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.o
+ .debug_line    0x0001351e     0x1db1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
+ .debug_line    0x000152cf     0x3891 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_line    0x00018b60     0x1a76 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_line    0x0001a5d6     0x265e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_line    0x0001cc34      0xd0b ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.o
+ .debug_line    0x0001d93f     0x25fa ./Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.o
+ .debug_line    0x0001ff39      0x791 ./Middlewares/Third_Party/FreeRTOS/Source/list.o
+ .debug_line    0x000206ca     0x1725 ./Middlewares/Third_Party/FreeRTOS/Source/queue.o
+ .debug_line    0x00021def     0x1ded ./Middlewares/Third_Party/FreeRTOS/Source/tasks.o
+ .debug_line    0x00023bdc      0xdff ./Middlewares/Third_Party/FreeRTOS/Source/timers.o
+ .debug_line    0x000249db      0x812 ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
+ .debug_line    0x000251ed      0x9a8 ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
+ .debug_line    0x00025b95       0xac ./TouchGFX/App/app_touchgfx.o
+ .debug_line    0x00025c41      0x770 ./TouchGFX/generated/fonts/src/ApplicationFontProvider.o
+ .debug_line    0x000263b1      0x9f5 ./TouchGFX/generated/fonts/src/CachedFont.o
+ .debug_line    0x00026da6      0xf57 ./TouchGFX/generated/fonts/src/CompressedFontCache.o
+ .debug_line    0x00027cfd     0x14c1 ./TouchGFX/generated/fonts/src/FontCache.o
+ .debug_line    0x000291be      0x56b ./TouchGFX/generated/fonts/src/Font_verdana_10_4bpp_0.o
+ .debug_line    0x00029729      0x56b ./TouchGFX/generated/fonts/src/Font_verdana_20_4bpp_0.o
+ .debug_line    0x00029c94      0x56b ./TouchGFX/generated/fonts/src/Font_verdana_40_4bpp_0.o
+ .debug_line    0x0002a1ff     0x13c7 ./TouchGFX/generated/fonts/src/GeneratedFont.o
+ .debug_line    0x0002b5c6      0x5d7 ./TouchGFX/generated/fonts/src/Kerning_verdana_10_4bpp.o
+ .debug_line    0x0002bb9d      0x5d7 ./TouchGFX/generated/fonts/src/Kerning_verdana_20_4bpp.o
+ .debug_line    0x0002c174      0x5d7 ./TouchGFX/generated/fonts/src/Kerning_verdana_40_4bpp.o
+ .debug_line    0x0002c74b      0x71c ./TouchGFX/generated/fonts/src/Table_verdana_10_4bpp.o
+ .debug_line    0x0002ce67      0x71c ./TouchGFX/generated/fonts/src/Table_verdana_20_4bpp.o
+ .debug_line    0x0002d583      0x71c ./TouchGFX/generated/fonts/src/Table_verdana_40_4bpp.o
+ .debug_line    0x0002dc9f      0x74f ./TouchGFX/generated/fonts/src/VectorFontRendererBuffers.o
+ .debug_line    0x0002e3ee     0x1de7 ./TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.o
+ .debug_line    0x000301d5     0x25f0 ./TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.o
+ .debug_line    0x000327c5      0x618 ./TouchGFX/generated/images/src/BitmapDatabase.o
+ .debug_line    0x00032ddd       0xeb ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_action.o
+ .debug_line    0x00032ec8       0xeb ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_normal.o
+ .debug_line    0x00032fb3       0xec ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_pressed.o
+ .debug_line    0x0003309f       0xde ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_backgrounds_active.o
+ .debug_line    0x0003317d       0xda ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_needles_smooth.o
+ .debug_line    0x00033257      0x5b0 ./TouchGFX/generated/texts/src/LanguageGb.o
+ .debug_line    0x00033807      0xfd5 ./TouchGFX/generated/texts/src/Texts.o
+ .debug_line    0x000347dc      0x76e ./TouchGFX/generated/texts/src/TypedTextDatabase.o
+ .debug_line    0x00034f4a     0x146f ./TouchGFX/gui/src/common/FrontendApplication.o
+ .debug_line    0x000363b9      0x669 ./TouchGFX/gui/src/model/Model.o
+ .debug_line    0x00036a22     0x166c ./TouchGFX/gui/src/screen1_screen/Screen1Presenter.o
+ .debug_line    0x0003808e     0x164f ./TouchGFX/gui/src/screen1_screen/Screen1View.o
+ .debug_line    0x000396dd      0x857 ./TouchGFX/target/STM32TouchController.o
+ .debug_line    0x00039f34      0x9c3 ./TouchGFX/target/TouchGFXGPIO.o
+ .debug_line    0x0003a8f7     0x14a9 ./TouchGFX/target/TouchGFXHAL.o
+ .debug_line    0x0003bda0      0xd59 ./TouchGFX/target/generated/OSWrappers.o
+ .debug_line    0x0003caf9     0x16b7 ./TouchGFX/target/generated/STM32DMA.o
+ .debug_line    0x0003e1b0     0x2784 ./TouchGFX/target/generated/TouchGFXConfiguration.o
+ .debug_line    0x00040934     0x2ae0 ./TouchGFX/target/generated/TouchGFXGeneratedHAL.o
 
-.debug_str      0x00000000   0x116e85
- .debug_str     0x00000000   0x116e85 ./Core/Src/main.o
+.debug_str      0x00000000   0x116e5e
+ .debug_str     0x00000000   0x116e5e ./Core/Src/main.o
                               0xe35aa (size before relaxing)
- .debug_str     0x00116e85    0xdd79c ./Core/Src/stm32f4xx_hal_msp.o
- .debug_str     0x00116e85    0xdc7e0 ./Core/Src/stm32f4xx_hal_timebase_tim.o
- .debug_str     0x00116e85    0xdcbc5 ./Core/Src/stm32f4xx_it.o
- .debug_str     0x00116e85     0x9949 ./Core/Src/syscalls.o
- .debug_str     0x00116e85     0x76f3 ./Core/Src/sysmem.o
- .debug_str     0x00116e85    0xdbc9a ./Core/Src/system_stm32f4xx.o
- .debug_str     0x00116e85       0x6b ./Core/Startup/startup_stm32f429zitx.o
- .debug_str     0x00116e85     0x464c ./Drivers/BSP/Components/ili9341/ili9341.o
- .debug_str     0x00116e85     0x4e45 ./Drivers/BSP/Components/stmpe811/stmpe811.o
- .debug_str     0x00116e85    0xdc8a8 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_str     0x00116e85    0xdc5d6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_str     0x00116e85    0xdbca0 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.o
- .debug_str     0x00116e85    0xdc08c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
- .debug_str     0x00116e85    0xdc261 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.o
- .debug_str     0x00116e85    0xdbe00 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_str     0x00116e85    0xdcc95 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
- .debug_str     0x00116e85    0xdc054 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o
- .debug_str     0x00116e85    0xdc2e9 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.o
- .debug_str     0x00116e85    0xdbe5d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
- .debug_str     0x00116e85    0xdc0b9 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_str     0x00116e85    0xdbe80 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
- .debug_str     0x00116e85    0xdc3a5 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.o
- .debug_str     0x00116e85    0xdc530 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
- .debug_str     0x00116e85    0xdcffc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
- .debug_str     0x00116e85    0xdc808 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
- .debug_str     0x00116e85    0xdc687 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
- .debug_str     0x00116e85    0xdc86f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.o
- .debug_str     0x00116e85    0xe6929 ./Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.o
- .debug_str     0x00116e85     0xab7c ./Middlewares/Third_Party/FreeRTOS/Source/list.o
- .debug_str     0x00116e85     0xc6bc ./Middlewares/Third_Party/FreeRTOS/Source/queue.o
- .debug_str     0x00116e85     0xd235 ./Middlewares/Third_Party/FreeRTOS/Source/tasks.o
- .debug_str     0x00116e85     0xcbf8 ./Middlewares/Third_Party/FreeRTOS/Source/timers.o
- .debug_str     0x00116e85     0x8798 ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
- .debug_str     0x00116e85     0xb4be ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
- .debug_str     0x00116e85     0x2efd ./TouchGFX/App/app_touchgfx.o
- .debug_str     0x00116e85     0x6176 ./TouchGFX/generated/fonts/src/ApplicationFontProvider.o
- .debug_str     0x00116e85     0x71f4 ./TouchGFX/generated/fonts/src/CachedFont.o
- .debug_str     0x00116e85    0x12825 ./TouchGFX/generated/fonts/src/CompressedFontCache.o
- .debug_str     0x00116e85     0xf4c0 ./TouchGFX/generated/fonts/src/FontCache.o
- .debug_str     0x00116e85     0x4ddf ./TouchGFX/generated/fonts/src/Font_verdana_10_4bpp_0.o
- .debug_str     0x00116e85     0x4ddf ./TouchGFX/generated/fonts/src/Font_verdana_20_4bpp_0.o
- .debug_str     0x00116e85     0x4ddf ./TouchGFX/generated/fonts/src/Font_verdana_40_4bpp_0.o
- .debug_str     0x00116e85     0xf132 ./TouchGFX/generated/fonts/src/GeneratedFont.o
- .debug_str     0x00116e85     0x54e0 ./TouchGFX/generated/fonts/src/Kerning_verdana_10_4bpp.o
- .debug_str     0x00116e85     0x54e0 ./TouchGFX/generated/fonts/src/Kerning_verdana_20_4bpp.o
- .debug_str     0x00116e85     0x54e0 ./TouchGFX/generated/fonts/src/Kerning_verdana_40_4bpp.o
- .debug_str     0x00116e85     0x6458 ./TouchGFX/generated/fonts/src/Table_verdana_10_4bpp.o
- .debug_str     0x00116e85     0x6458 ./TouchGFX/generated/fonts/src/Table_verdana_20_4bpp.o
- .debug_str     0x00116e85     0x6458 ./TouchGFX/generated/fonts/src/Table_verdana_40_4bpp.o
- .debug_str     0x00116e85     0x6d5c ./TouchGFX/generated/fonts/src/VectorFontRendererBuffers.o
- .debug_str     0x00116e85    0x251d6 ./TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.o
- .debug_str     0x00116e85    0x22d85 ./TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.o
- .debug_str     0x00116e85     0x63d9 ./TouchGFX/generated/images/src/BitmapDatabase.o
- .debug_str     0x00116e85     0x3904 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_action.o
- .debug_str     0x00116e85     0x3904 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_normal.o
- .debug_str     0x00116e85     0x3906 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_pressed.o
- .debug_str     0x00116e85     0x38ea ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_backgrounds_active.o
- .debug_str     0x00116e85     0x38e2 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_needles_smooth.o
- .debug_str     0x00116e85     0x4f1b ./TouchGFX/generated/texts/src/LanguageGb.o
- .debug_str     0x00116e85     0xe581 ./TouchGFX/generated/texts/src/Texts.o
- .debug_str     0x00116e85     0x67ac ./TouchGFX/generated/texts/src/TypedTextDatabase.o
- .debug_str     0x00116e85    0x14a3c ./TouchGFX/gui/src/common/FrontendApplication.o
- .debug_str     0x00116e85     0x9192 ./TouchGFX/gui/src/model/Model.o
- .debug_str     0x00116e85    0x21eff ./TouchGFX/gui/src/screen1_screen/Screen1Presenter.o
- .debug_str     0x00116e85    0x21e98 ./TouchGFX/gui/src/screen1_screen/Screen1View.o
- .debug_str     0x00116e85     0x5bda ./TouchGFX/target/STM32TouchController.o
- .debug_str     0x00116e85    0xdc3e1 ./TouchGFX/target/TouchGFXGPIO.o
- .debug_str     0x00116e85    0xea7c2 ./TouchGFX/target/TouchGFXHAL.o
- .debug_str     0x00116e85     0x9e9b ./TouchGFX/target/generated/OSWrappers.o
- .debug_str     0x00116e85    0xeaf13 ./TouchGFX/target/generated/STM32DMA.o
- .debug_str     0x00116e85    0xf96e4 ./TouchGFX/target/generated/TouchGFXConfiguration.o
- .debug_str     0x00116e85    0xf8d49 ./TouchGFX/target/generated/TouchGFXGeneratedHAL.o
+ .debug_str     0x00116e5e    0xdd79c ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_str     0x00116e5e    0xdc7e0 ./Core/Src/stm32f4xx_hal_timebase_tim.o
+ .debug_str     0x00116e5e    0xdcbc5 ./Core/Src/stm32f4xx_it.o
+ .debug_str     0x00116e5e     0x993e ./Core/Src/syscalls.o
+ .debug_str     0x00116e5e     0x76e8 ./Core/Src/sysmem.o
+ .debug_str     0x00116e5e    0xdbc9a ./Core/Src/system_stm32f4xx.o
+ .debug_str     0x00116e5e       0x60 ./Core/Startup/startup_stm32f429zitx.o
+ .debug_str     0x00116e5e     0x464c ./Drivers/BSP/Components/ili9341/ili9341.o
+ .debug_str     0x00116e5e     0x4e45 ./Drivers/BSP/Components/stmpe811/stmpe811.o
+ .debug_str     0x00116e5e    0xdc8a8 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_str     0x00116e5e    0xdc5d6 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_str     0x00116e5e    0xdbca0 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.o
+ .debug_str     0x00116e5e    0xdc08c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+ .debug_str     0x00116e5e    0xdc261 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.o
+ .debug_str     0x00116e5e    0xdbe00 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_str     0x00116e5e    0xdcc95 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o
+ .debug_str     0x00116e5e    0xdc054 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o
+ .debug_str     0x00116e5e    0xdc2e9 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.o
+ .debug_str     0x00116e5e    0xdbe5d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o
+ .debug_str     0x00116e5e    0xdc0b9 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_str     0x00116e5e    0xdbe80 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o
+ .debug_str     0x00116e5e    0xdc3a5 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.o
+ .debug_str     0x00116e5e    0xdc530 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o
+ .debug_str     0x00116e5e    0xdcffc ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o
+ .debug_str     0x00116e5e    0xdc808 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x00116e5e    0xdc687 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
+ .debug_str     0x00116e5e    0xdc86f ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.o
+ .debug_str     0x00116e5e    0xe6929 ./Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.o
+ .debug_str     0x00116e5e     0xab7c ./Middlewares/Third_Party/FreeRTOS/Source/list.o
+ .debug_str     0x00116e5e     0xc6bc ./Middlewares/Third_Party/FreeRTOS/Source/queue.o
+ .debug_str     0x00116e5e     0xd235 ./Middlewares/Third_Party/FreeRTOS/Source/tasks.o
+ .debug_str     0x00116e5e     0xcbf8 ./Middlewares/Third_Party/FreeRTOS/Source/timers.o
+ .debug_str     0x00116e5e     0x8798 ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
+ .debug_str     0x00116e5e     0xb4be ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
+ .debug_str     0x00116e5e     0x2efd ./TouchGFX/App/app_touchgfx.o
+ .debug_str     0x00116e5e     0x6176 ./TouchGFX/generated/fonts/src/ApplicationFontProvider.o
+ .debug_str     0x00116e5e     0x71f4 ./TouchGFX/generated/fonts/src/CachedFont.o
+ .debug_str     0x00116e5e    0x12825 ./TouchGFX/generated/fonts/src/CompressedFontCache.o
+ .debug_str     0x00116e5e     0xf4c0 ./TouchGFX/generated/fonts/src/FontCache.o
+ .debug_str     0x00116e5e     0x4ddf ./TouchGFX/generated/fonts/src/Font_verdana_10_4bpp_0.o
+ .debug_str     0x00116e5e     0x4ddf ./TouchGFX/generated/fonts/src/Font_verdana_20_4bpp_0.o
+ .debug_str     0x00116e5e     0x4ddf ./TouchGFX/generated/fonts/src/Font_verdana_40_4bpp_0.o
+ .debug_str     0x00116e5e     0xf132 ./TouchGFX/generated/fonts/src/GeneratedFont.o
+ .debug_str     0x00116e5e     0x54e0 ./TouchGFX/generated/fonts/src/Kerning_verdana_10_4bpp.o
+ .debug_str     0x00116e5e     0x54e0 ./TouchGFX/generated/fonts/src/Kerning_verdana_20_4bpp.o
+ .debug_str     0x00116e5e     0x54e0 ./TouchGFX/generated/fonts/src/Kerning_verdana_40_4bpp.o
+ .debug_str     0x00116e5e     0x6458 ./TouchGFX/generated/fonts/src/Table_verdana_10_4bpp.o
+ .debug_str     0x00116e5e     0x6458 ./TouchGFX/generated/fonts/src/Table_verdana_20_4bpp.o
+ .debug_str     0x00116e5e     0x6458 ./TouchGFX/generated/fonts/src/Table_verdana_40_4bpp.o
+ .debug_str     0x00116e5e     0x6d5c ./TouchGFX/generated/fonts/src/VectorFontRendererBuffers.o
+ .debug_str     0x00116e5e    0x251d6 ./TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.o
+ .debug_str     0x00116e5e    0x22d85 ./TouchGFX/generated/gui_generated/src/screen1_screen/Screen1ViewBase.o
+ .debug_str     0x00116e5e     0x63d9 ./TouchGFX/generated/images/src/BitmapDatabase.o
+ .debug_str     0x00116e5e     0x3904 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_action.o
+ .debug_str     0x00116e5e     0x3904 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_normal.o
+ .debug_str     0x00116e5e     0x3906 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_pressed.o
+ .debug_str     0x00116e5e     0x38ea ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_backgrounds_active.o
+ .debug_str     0x00116e5e     0x38e2 ./TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_gauge_medium_needles_smooth.o
+ .debug_str     0x00116e5e     0x4f1b ./TouchGFX/generated/texts/src/LanguageGb.o
+ .debug_str     0x00116e5e     0xe581 ./TouchGFX/generated/texts/src/Texts.o
+ .debug_str     0x00116e5e     0x67ac ./TouchGFX/generated/texts/src/TypedTextDatabase.o
+ .debug_str     0x00116e5e    0x14a3c ./TouchGFX/gui/src/common/FrontendApplication.o
+ .debug_str     0x00116e5e     0x9192 ./TouchGFX/gui/src/model/Model.o
+ .debug_str     0x00116e5e    0x21eff ./TouchGFX/gui/src/screen1_screen/Screen1Presenter.o
+ .debug_str     0x00116e5e    0x21e98 ./TouchGFX/gui/src/screen1_screen/Screen1View.o
+ .debug_str     0x00116e5e     0x5bda ./TouchGFX/target/STM32TouchController.o
+ .debug_str     0x00116e5e    0xdc3e1 ./TouchGFX/target/TouchGFXGPIO.o
+ .debug_str     0x00116e5e    0xea7c2 ./TouchGFX/target/TouchGFXHAL.o
+ .debug_str     0x00116e5e     0x9e9b ./TouchGFX/target/generated/OSWrappers.o
+ .debug_str     0x00116e5e    0xeaf13 ./TouchGFX/target/generated/STM32DMA.o
+ .debug_str     0x00116e5e    0xf96e4 ./TouchGFX/target/generated/TouchGFXConfiguration.o
+ .debug_str     0x00116e5e    0xf8d49 ./TouchGFX/target/generated/TouchGFXGeneratedHAL.o
 
 .comment        0x00000000       0x88
  .comment       0x00000000       0x88 ./Core/Src/main.o
@@ -20189,6 +20197,6 @@ LOAD D:/ST/STM32CubeIDE_2.1.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_frame   0x0001015c       0x34 D:/ST/STM32CubeIDE_2.1.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740/tools/bin/../lib/gcc/arm-none-eabi/14.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
 
 .debug_line_str
-                0x00000000       0x4f
+                0x00000000       0x44
  .debug_line_str
-                0x00000000       0x4f ./Core/Startup/startup_stm32f429zitx.o
+                0x00000000       0x44 ./Core/Startup/startup_stm32f429zitx.o
