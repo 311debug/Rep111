@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <C:/INSTALL/TouchGFXProjects/MUD4/TouchGFX/gui/include/gui/model/gui_bridge.h>
+#include <D:/Rep111/Rep111/MUD4/TouchGFX/gui/include/gui/model/gui_bridge.h>
 #include "Components/ili9341/ili9341.h"
 /* USER CODE END Includes */
 

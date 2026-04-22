@@ -78,9 +78,16 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  TouchGFX_Framebuffer (NOLOAD) : 
+ /* TouchGFX_Framebuffer (NOLOAD) : 
   {
     *(TouchGFX_Framebuffer)
+  } >SDRAM */
+  .TouchGFX_Framebuffer (NOLOAD) :
+  {
+    . = ALIGN(4);
+    *(.TouchGFX_Framebuffer)
+    *(.TouchGFX_Framebuffer*)
+    . = ALIGN(4);
   } >SDRAM
 }
 
