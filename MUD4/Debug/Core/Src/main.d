@@ -48,7 +48,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
  ../TouchGFX/App/app_touchgfx.h \
- D:/Rep111/Rep111/MUD4/TouchGFX/gui/include/gui/model/gui_bridge.h \
+ C:/INSTALL/TouchGFXProjects/MUD4/TouchGFX/gui/include/gui/model/gui_bridge.h \
  ../Drivers/BSP/Components/ili9341/ili9341.h \
  ../Drivers/BSP/Components/ili9341/../Common/lcd.h
 ../Core/Inc/main.h:
@@ -101,6 +101,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../TouchGFX/App/app_touchgfx.h:
-D:/Rep111/Rep111/MUD4/TouchGFX/gui/include/gui/model/gui_bridge.h:
+C:/INSTALL/TouchGFXProjects/MUD4/TouchGFX/gui/include/gui/model/gui_bridge.h:
 ../Drivers/BSP/Components/ili9341/ili9341.h:
 ../Drivers/BSP/Components/ili9341/../Common/lcd.h:

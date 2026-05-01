@@ -48,7 +48,6 @@ MEMORY
   CCMRAM    (xrw)    : ORIGIN = 0x10000000,   LENGTH = 64K
   RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 192K
   FLASH    (rx)    : ORIGIN = 0x8000000,   LENGTH = 2048K
-  SDRAM   (rw)  : ORIGIN = 0xD0000000, LENGTH = 8192K
 }
 
 /* Sections */
@@ -197,14 +196,7 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
   } >RAM
-  /* TouchGFX double framebuffer goes in external SDRAM */ 
- .TouchGFX_Framebuffer (NOLOAD) :
-  {
-    . = ALIGN(4);
-    *(.TouchGFX_Framebuffer)
-    *(.TouchGFX_Framebuffer*)
-    . = ALIGN(4);
-  } >SDRAM
+
   /* Remove information from the compiler libraries */
   /DISCARD/ :
   {

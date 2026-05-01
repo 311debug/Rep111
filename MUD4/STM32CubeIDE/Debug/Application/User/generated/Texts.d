@@ -1,5 +1,5 @@
 Application/User/generated/Texts.o: \
- C:/INSTALL/Rep111/MUD4/TouchGFX/generated/texts/src/Texts.cpp \
+ D:/Rep111/Rep111/MUD4/TouchGFX/generated/texts/src/Texts.cpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/TextProvider.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Font.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/Unicode.hpp \

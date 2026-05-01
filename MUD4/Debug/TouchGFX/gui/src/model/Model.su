@@ -1,6 +1,6 @@
 ../TouchGFX/gui/src/model/Model.cpp:4:1:Model::Model()	16	static
 ../TouchGFX/gui/src/model/Model.cpp:9:6:void Model::tick()	24	static
-../TouchGFX/gui/src/model/Model.cpp:19:6:void Model::updateGauge(int)	16	static
-../TouchGFX/gui/src/model/Model.cpp:26:6:void Model::setGaugeValue(int)	16	static
-../TouchGFX/gui/src/model/Model.cpp:29:1:void __static_initialization_and_destruction_0()	8	static
-../TouchGFX/gui/src/model/Model.cpp:29:1:cpp)	8	static
+../TouchGFX/gui/src/model/Model.cpp:28:6:void Model::updateGauge(int)	16	static
+../TouchGFX/gui/src/model/Model.cpp:35:6:void Model::setGaugeValue(int)	16	static
+../TouchGFX/gui/src/model/Model.cpp:38:1:void __static_initialization_and_destruction_0()	8	static
+../TouchGFX/gui/src/model/Model.cpp:38:1:cpp)	8	static

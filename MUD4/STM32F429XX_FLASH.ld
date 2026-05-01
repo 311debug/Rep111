@@ -78,11 +78,10 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
- TouchGFX_Framebuffer (NOLOAD) : 
+  TouchGFX_Framebuffer (NOLOAD) : 
   {
     *(TouchGFX_Framebuffer)
   } >SDRAM
-  
 }
 
 /* Define specific placement of memory areas */
