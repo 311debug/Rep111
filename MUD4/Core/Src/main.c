@@ -589,8 +589,9 @@ static void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
-  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);
-   __HAL_TIM_ENABLE_IT(&htim2, TIM_IT_UPDATE);
+  HAL_TIM_Base_Start_IT(&htim2);// включает прерывание на конец периода
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);// включает прерывание на конец импульса
+  // __HAL_TIM_ENABLE_IT(&htim2, TIM_IT_UPDATE);//включение прерываний через регистор вручную
   /* USER CODE END TIM2_Init 2 */
   HAL_TIM_MspPostInit(&htim2);
 
@@ -632,8 +633,11 @@ static void MX_TIM9_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM9_Init 2 */
+  HAL_TIM_Base_Start_IT(&htim9);// включает прерывание на конец периода
   HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
-  __HAL_TIM_ENABLE_IT(&htim9, TIM_IT_UPDATE);
+  //htim9.Instance->DIER|=TIM_IT_UPDATE; //включение прерываний через регистор вручную
+ // ((__HANDLE__)->Instance->DIER |= (__INTERRUPT__))
+ // __HAL_TIM_ENABLE_IT(&htim9, TIM_IT_UPDATE);
   /* USER CODE END TIM9_Init 2 */
   HAL_TIM_MspPostInit(&htim9);
 
@@ -1178,6 +1182,18 @@ void StartDefaultTask(void *argument)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
+	if (htim->Instance == TIM9 &&
+	            htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+	        {
+	            // Сработает в момент CNT == ARR (конец периода)
+
+	        }
+	if (htim->Instance == TIM2 &&
+		            htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+		        {
+		            // Сработает в момент CNT == ARR (конец периода)
+
+		        }
 
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM6)
@@ -1187,6 +1203,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
 
   /* USER CODE END Callback 1 */
+}
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
+{
+    if (htim->Instance == TIM9 &&
+        htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+    {
+        // Сработает в момент CNT == CCR (конец импульса)
+
+    }
+    if (htim->Instance == TIM2 &&
+            htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+        {
+            // Сработает в момент CNT == CCR (конец импульса)
+
+        }
 }
 
 /**

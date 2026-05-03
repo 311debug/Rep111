@@ -1,4 +1,4 @@
-15:58:41 **** Incremental Build of configuration Debug for project STM32F429I_DISCO_REV_D01 ****
+23:45:58 **** Incremental Build of configuration Debug for project STM32F429I_DISCO_REV_D01 ****
 make -j8 all 
 arm-none-eabi-gcc "D:/Rep111/Rep111/MUD4/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DUSE_BPP=16 -DDEBUG -DSTM32F429xx -c -I../../Core/Inc -I../../Drivers/CMSIS/Include -I../../Drivers/BSP -I../../TouchGFX/target -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../TouchGFX/App -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../TouchGFX/target/generated -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Middlewares/ST/touchgfx/framework/include -I../../TouchGFX/generated/fonts/include -I../../TouchGFX/generated/gui_generated/include -I../../TouchGFX/generated/images/include -I../../TouchGFX/generated/texts/include -I../../TouchGFX/gui/include -I../../TouchGFX/generated/videos/include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/FreeRTOS/cmsis_os2.d" -MT"Middlewares/FreeRTOS/cmsis_os2.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/FreeRTOS/cmsis_os2.o"
 arm-none-eabi-gcc "D:/Rep111/Rep111/MUD4/Middlewares/Third_Party/FreeRTOS/Source/croutine.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DUSE_BPP=16 -DDEBUG -DSTM32F429xx -c -I../../Core/Inc -I../../Drivers/CMSIS/Include -I../../Drivers/BSP -I../../TouchGFX/target -I../../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../../TouchGFX/App -I../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../../TouchGFX/target/generated -I../../Middlewares/Third_Party/FreeRTOS/Source/include -I../../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../../Drivers/STM32F4xx_HAL_Driver/Inc -I../../Middlewares/ST/touchgfx/framework/include -I../../TouchGFX/generated/fonts/include -I../../TouchGFX/generated/gui_generated/include -I../../TouchGFX/generated/images/include -I../../TouchGFX/generated/texts/include -I../../TouchGFX/gui/include -I../../TouchGFX/generated/videos/include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/FreeRTOS/croutine.d" -MT"Middlewares/FreeRTOS/croutine.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/FreeRTOS/croutine.o"
@@ -28,9 +28,9 @@ Finished building target: STM32F429I_DISCO_REV_D01.elf
  
 arm-none-eabi-size  STM32F429I_DISCO_REV_D01.elf 
 arm-none-eabi-objdump -h -S STM32F429I_DISCO_REV_D01.elf  > "STM32F429I_DISCO_REV_D01.list"
-arm-none-eabi-objcopy  -O ihex STM32F429I_DISCO_REV_D01.elf  "STM32F429I_DISCO_REV_D01.hex"
    text	   data	    bss	    dec	    hex	filename
  465602	    868	 544768	1011238	  f6e26	STM32F429I_DISCO_REV_D01.elf
+arm-none-eabi-objcopy  -O ihex STM32F429I_DISCO_REV_D01.elf  "STM32F429I_DISCO_REV_D01.hex"
 Finished building: default.size.stdout
  
 Finished building: STM32F429I_DISCO_REV_D01.hex
@@ -38,5 +38,5 @@ Finished building: STM32F429I_DISCO_REV_D01.hex
 Finished building: STM32F429I_DISCO_REV_D01.list
  
 
-15:58:54 Build Finished. 0 errors, 0 warnings. (took 13s.908ms)
+23:46:06 Build Finished. 0 errors, 0 warnings. (took 7s.886ms)
 
