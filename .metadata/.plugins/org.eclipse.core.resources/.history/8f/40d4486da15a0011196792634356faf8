@@ -1319,24 +1319,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		            htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
 		        {
 		            // Сработает в момент CNT == ARR (конец периода)
-					uint32_t period;
-			        uint16_t duty =g_duty_percent;           // пишет задача
-			        if (duty < 0)   duty = 0;
-			        if (duty > 100) duty = 100;
-
-
-			       if (duty!=0) {period =100000000/(16*(uint32_t)duty*(100-(uint32_t)duty));}
-			       else period=65535;
-			        if (period>65535) period=65535;
-			        uint32_t high   = (period * (uint32_t)duty) / 100;
-
-			        if (high >= period)    high = period-1;
-
-
-
-			       htim2.Instance->ARR=period - 1;
-			       htim2.Init.Period=period - 1;
-			       htim2.Instance->CCR1=high;
 
 		        }
 
