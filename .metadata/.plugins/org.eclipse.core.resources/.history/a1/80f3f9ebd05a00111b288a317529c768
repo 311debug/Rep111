@@ -168,8 +168,8 @@ uint32_t Spi5Timeout = SPI5_TIMEOUT_MAX; /*<! Value of Timeout when SPI communic
 uint32_t last = 0;
 uint32_t freq = 0;
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
-{if (htim->Instance == TIM10 &&
-        htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+{if (htim->Instance == TIM1 &&
+        htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
     {
         uint32_t now = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
         uint32_t diff = (now >= last) ? (now - last) : (0xFFFFFFFF - last + now);
@@ -229,6 +229,10 @@ int main(void)
   //HAL_TIM_PWM_MspInit(&htim9);    ///// дублирует MX_TouchGFX_Init();
 
   HAL_UART_Receive_IT(&huart2, &rx2Byte[0], 2);// вызов первый раз для запуска иначе нет
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim9, TIM_CHANNEL_1);
+  HAL_TIM_Base_Start_IT(&htim9);// включает прерывание на конец периода
+  HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -657,9 +661,10 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
+  __HAL_TIM_DISABLE_OCxPRELOAD(&htim2, TIM_CHANNEL_1);
   /* USER CODE BEGIN TIM2_Init 2 */
-  HAL_TIM_Base_Start_IT(&htim2);// включает прерывание на конец периода
-  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);// включает прерывание на конец импульса
+  //HAL_TIM_Base_Start_IT(&htim2);// включает прерывание на конец периода
+ // HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);// включает прерывание на конец импульса
   // __HAL_TIM_ENABLE_IT(&htim2, TIM_IT_UPDATE);//включение прерываний через регистор вручную
   /* USER CODE END TIM2_Init 2 */
   HAL_TIM_MspPostInit(&htim2);
@@ -710,7 +715,7 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM3_Init 2 */
-  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+  //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
   /* USER CODE END TIM3_Init 2 */
 
 }
@@ -750,9 +755,9 @@ static void MX_TIM9_Init(void)
   {
     Error_Handler();
   }
+  __HAL_TIM_DISABLE_OCxPRELOAD(&htim9, TIM_CHANNEL_1);
   /* USER CODE BEGIN TIM9_Init 2 */
-  HAL_TIM_Base_Start_IT(&htim9);// включает прерывание на конец периода
-  HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
+
   //htim9.Instance->DIER|=TIM_IT_UPDATE; //включение прерываний через регистор вручную
  // ((__HANDLE__)->Instance->DIER |= (__INTERRUPT__))
  // __HAL_TIM_ENABLE_IT(&htim9, TIM_IT_UPDATE);
@@ -1283,8 +1288,8 @@ void StartDefaultTask(void *argument)
 //extern Model model;
   for(;;)
   {
-	  int32_t pos = __HAL_TIM_GET_COUNTER(&htim2);
-	  __HAL_TIM_SET_COUNTER(&htim2, 0);
+	  int32_t pos = __HAL_TIM_GET_COUNTER(&htim3);
+	  __HAL_TIM_SET_COUNTER(&htim3, 0);
 	//static  int value=20; // gauge функция
 	 // value = (value % 99)+1;
 	//value=g_duty_percent;
@@ -1318,7 +1323,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim->Instance == TIM2 &&
 		            htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
 		        {
-		            // Сработает в момент CNT == ARR (конец периода)
+		         /*   // Сработает в момент CNT == ARR (конец периода)
+					uint32_t period;
+			        uint16_t duty =g_duty_percent;           // пишет задача
+			        if (duty < 0)   duty = 0;
+			        if (duty > 100) duty = 100;
+
+
+			       if (duty!=0) {period =100000000/(16*(uint32_t)duty*(100-(uint32_t)duty));}
+			       else period=65535;
+			        if (period>65535) period=65535;
+			        uint32_t high   = (period * (uint32_t)duty) / 100;
+
+			        if (high >= period)    high = period-1;
+
+
+
+			       htim2.Instance->ARR=period - 1;
+			       htim2.Init.Period=period - 1;
+			       htim2.Instance->CCR1=high; */
 
 		        }
 
