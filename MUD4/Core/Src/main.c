@@ -104,8 +104,12 @@ const osMessageQueueAttr_t myQueueUART_attributes = {
 };
 /* USER CODE BEGIN PV */
 uint8_t isRevD = 0; /* Applicable only for STM32F429I DISCOVERY REVD and above */
-osMessageQueueId_t dataQueueHandle; /////////////// Очередь сообщениии
+osMessageQueueId_t dataQueueHandle; /////////////// Очередь сообщениии скважность
+osMessageQueueId_t dataQueueHandleTDR;///очередь для частоты ТДР
+osMessageQueueId_t dataQueueHandleKND;/// очередь для угла КНД
+
 volatile int g_duty_percent = 50; // глобальная скважность
+volatile bool resetKND=false;
 uint8_t rx2Byte[2];
 uint8_t rxByte;
 /* USER CODE END PV */
@@ -167,15 +171,37 @@ uint32_t I2c3Timeout = I2C3_TIMEOUT_MAX; /*<! Value of Timeout when I2C communic
 uint32_t Spi5Timeout = SPI5_TIMEOUT_MAX; /*<! Value of Timeout when SPI communication fails */
 uint32_t last = 0;
 uint32_t freq = 0;
+uint32_t freqarray[20]={0};
+uint16_t i=0;
+
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
-{if (htim->Instance == TIM1 &&
-        htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+{if (htim->Instance == TIM1 &&  htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
     {
-        uint32_t now = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-        uint32_t diff = (now >= last) ? (now - last) : (0xFFFFFFFF - last + now);
+        uint32_t now = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
+        uint32_t diff = (now >= last) ? (now - last) : (0xFFFF - last + now);
         last = now;
 
-        freq = 10000 / diff;  // 10 kHz таймер
+
+       //freq =((freq*20)-freqarray[i])/20;
+        //freq =freq-(freqarray[i]/20);
+
+        freqarray[i]=10000 / diff;// 10 кГц таймер
+
+       //freq =((freq*20)+freqarray[i])/20;
+       // freq =freq+(freqarray[i]/20);
+
+
+        i=(i+1)%20;
+        if (i==0)
+        {
+        	freq=0;
+        	for(int ii=0;ii<20;ii++){freq=freq+freqarray[ii]; }
+        	freq=freq/20;
+        	osMessageQueuePut(dataQueueHandleTDR, &freq , 0, 0);
+        }
+
+
+
     }
 
 }
@@ -228,10 +254,18 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //HAL_TIM_PWM_MspInit(&htim9);    ///// дублирует MX_TouchGFX_Init();
 
-  HAL_UART_Receive_IT(&huart2, &rx2Byte[0], 2);// вызов первый раз для запуска иначе нет
+  HAL_UART_Receive_IT(&huart2, &rx2Byte[0], 2);// вызов первый раз УАРТ для запуска иначе нет
+
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_Base_Start_IT(&htim2);// включает прерывание на конец периода
+
   HAL_TIM_PWM_Start(&htim9, TIM_CHANNEL_1);
-  //HAL_TIM_Base_Start_IT(&htim9);// включает прерывание на конец периода
+  HAL_TIM_Base_Start_IT(&htim9);// включает прерывание на конец периода
+
+  HAL_TIM_IC_Start(&htim1, TIM_CHANNEL_2);
+  HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_2);
+
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
   //HAL_TIM_PWM_Start_IT(&htim9, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
@@ -256,7 +290,9 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
-  dataQueueHandle = osMessageQueueNew(8,sizeof(int), NULL);/// очередь сообщенийййй
+  dataQueueHandle = osMessageQueueNew(4,sizeof(int), NULL);/// очередь сообщений
+  dataQueueHandleTDR = osMessageQueueNew(8,sizeof(uint32_t), NULL);/// очередьчастоты ТДР
+  dataQueueHandleKND = osMessageQueueNew(8,sizeof(uint32_t), NULL);/// очередьчастоты ТДР
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -589,7 +625,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 8999;
+  htim1.Init.Prescaler = 17999;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 65535;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -638,7 +674,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 179;
+  htim2.Init.Prescaler = 89;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 24999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -715,7 +751,7 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM3_Init 2 */
-  //HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+
   /* USER CODE END TIM3_Init 2 */
 
 }
@@ -1288,8 +1324,14 @@ void StartDefaultTask(void *argument)
 //extern Model model;
   for(;;)
   {
-	  int32_t pos = __HAL_TIM_GET_COUNTER(&htim3);
-	  __HAL_TIM_SET_COUNTER(&htim3, 0);
+	  int32_t pos = htim3.Instance->CNT;
+	if  (resetKND==true)
+		{
+		htim3.Instance->CNT = 15;
+		resetKND=false;
+		}
+	osMessageQueuePut(dataQueueHandleKND, &pos , 0, 0);
+	//  __HAL_TIM_GET_COUNTER(&htim3);
 	//static  int value=20; // gauge функция
 	 // value = (value % 99)+1;
 	//value=g_duty_percent;
@@ -1320,17 +1362,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	            // Сработает в момент CNT == ARR (конец периода)
 
 	        }
-	if (htim->Instance == TIM2 &&
-		            htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+	if (htim->Instance == TIM2 /* && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1*/)
 		        {
-		         /*   // Сработает в момент CNT == ARR (конец периода)
+		            // Сработает в момент CNT == ARR (конец периода)
 					uint32_t period;
 			        uint16_t duty =g_duty_percent;           // пишет задача
 			        if (duty < 0)   duty = 0;
 			        if (duty > 100) duty = 100;
 
 
-			       if (duty!=0) {period =100000000/(16*(uint32_t)duty*(100-(uint32_t)duty));}
+			       if (duty!=0) {period =1000000000/(16*(uint32_t)duty*(100-(uint32_t)duty));}
 			       else period=65535;
 			        if (period>65535) period=65535;
 			        uint32_t high   = (period * (uint32_t)duty) / 100;
@@ -1341,7 +1382,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 			       htim2.Instance->ARR=period - 1;
 			       htim2.Init.Period=period - 1;
-			       htim2.Instance->CCR1=high; */
+			       htim2.Instance->CCR1=high;
 
 		        }
 

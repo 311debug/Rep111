@@ -13,6 +13,9 @@ Middlewares/ST/touchgfx/
 Middlewares/ST/touchgfx_components/
 Middlewares/ST/touchgfx_backup*/
 gcc/components.mk
+desktop.ini
+Thumbs.db
+assets/images/desktop.ini
 
 # IAR
 EWARM/settings/

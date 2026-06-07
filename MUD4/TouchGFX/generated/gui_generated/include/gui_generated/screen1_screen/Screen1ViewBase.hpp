@@ -30,6 +30,10 @@ public:
     {
         // Override and implement this function in Screen1
     }
+    virtual void SetKND()
+    {
+        // Override and implement this function in Screen1
+    }
 
 protected:
     FrontendApplication& application() {
@@ -44,12 +48,19 @@ protected:
     touchgfx::TextAreaWithOneWildcard textArea1;
     touchgfx::ButtonWithLabel buttonWithLabel1;
     touchgfx::ButtonWithLabel buttonWithLabel2;
+    touchgfx::TextAreaWithOneWildcard textAreaTDR;
+    touchgfx::TextAreaWithOneWildcard textAreaKND;
+    touchgfx::ButtonWithLabel buttonSetKND;
 
     /*
      * Wildcard Buffers
      */
     static const uint16_t TEXTAREA1_SIZE = 10;
     touchgfx::Unicode::UnicodeChar textArea1Buffer[TEXTAREA1_SIZE];
+    static const uint16_t TEXTAREATDR_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar textAreaTDRBuffer[TEXTAREATDR_SIZE];
+    static const uint16_t TEXTAREAKND_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar textAreaKNDBuffer[TEXTAREAKND_SIZE];
 
 private:
 

@@ -1,5 +1,5 @@
-D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:4:1:Model::Model()	1
-D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:9:6:void Model::tick()	3
-D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:19:6:void Model::updateGauge(int)	2
-D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:26:6:void Model::setGaugeValue(int)	1
-D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:29:1:cpp)	1
+D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:5:1:Model::Model()	1
+D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:10:6:void Model::tick()	7
+D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:34:6:void Model::updateGauge(int)	2
+D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:41:6:void Model::setGaugeValue(int)	1
+D:/Rep111/Rep111/MUD4/TouchGFX/gui/src/model/Model.cpp:44:1:cpp)	1

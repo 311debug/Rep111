@@ -13,6 +13,8 @@ class Screen1Presenter : public touchgfx::Presenter, public ModelListener
 public:
     Screen1Presenter(Screen1View& v);
     void updateGauge(int value); // обновление стрелки
+    void updateTDR(uint32_t valueTDR); //обновление частоты
+    void  updateKND(uint32_t valueKND);
     /**
      * The activate function is called automatically when this screen is "switched in"
      * (ie. made active). Initialization logic can be placed here.

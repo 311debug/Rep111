@@ -13,8 +13,11 @@ public:
     virtual void tearDownScreen();
     void toggleLED();// управление переключателем
     void updateGauge(int value);// управление стрелкой
+    void updateTDR(uint32_t valueTDR);// // частота
+    void updateKND(uint32_t valueKND);// // частота
     void function1();
     void function2();
+    void SetKND();
 protected:
 };
 extern Screen1View* screen1ViewPtr;

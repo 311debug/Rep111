@@ -24,7 +24,7 @@ Screen1ViewBase::Screen1ViewBase() :
     gauge1.setSteadyNeedleRenderingAlgorithm(touchgfx::TextureMapper::BILINEAR_INTERPOLATION);
     add(gauge1);
 
-    textArea1.setXY(31, 174);
+    textArea1.setXY(2, 174);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 255, 23));
     textArea1.setLinespacing(0);
     Unicode::snprintf(textArea1Buffer, TEXTAREA1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_9ZH6).getText());
@@ -48,6 +48,32 @@ Screen1ViewBase::Screen1ViewBase() :
     buttonWithLabel2.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     buttonWithLabel2.setAction(buttonCallback);
     add(buttonWithLabel2);
+
+    textAreaTDR.setXY(2, 198);
+    textAreaTDR.setColor(touchgfx::Color::getColorFromRGB(241, 245, 17));
+    textAreaTDR.setLinespacing(0);
+    Unicode::snprintf(textAreaTDRBuffer, TEXTAREATDR_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_6GDC).getText());
+    textAreaTDR.setWildcard(textAreaTDRBuffer);
+    textAreaTDR.resizeToCurrentText();
+    textAreaTDR.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6U1A));
+    add(textAreaTDR);
+
+    textAreaKND.setXY(0, 222);
+    textAreaKND.setColor(touchgfx::Color::getColorFromRGB(250, 87, 87));
+    textAreaKND.setLinespacing(0);
+    Unicode::snprintf(textAreaKNDBuffer, TEXTAREAKND_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_3X55).getText());
+    textAreaKND.setWildcard(textAreaKNDBuffer);
+    textAreaKND.resizeToCurrentText();
+    textAreaKND.setTypedText(touchgfx::TypedText(T___SINGLEUSE_01A6));
+    add(textAreaKND);
+
+    buttonSetKND.setXY(130, 209);
+    buttonSetKND.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_TINY_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_TINY_ROUNDED_PRESSED_ID));
+    buttonSetKND.setLabelText(touchgfx::TypedText(T___SINGLEUSE_K3W4));
+    buttonSetKND.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    buttonSetKND.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    buttonSetKND.setAction(buttonCallback);
+    add(buttonSetKND);
 }
 
 Screen1ViewBase::~Screen1ViewBase()
@@ -75,5 +101,12 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When buttonWithLabel2 clicked call virtual function
         //Call function2
         function2();
+    }
+    if (&src == &buttonSetKND)
+    {
+        //InteractSetKND
+        //When buttonSetKND clicked call virtual function
+        //Call SetKND
+        SetKND();
     }
 }

@@ -10,6 +10,8 @@ public:
     
     virtual ~ModelListener() {}
     virtual void updateGauge(int value) = 0;
+    virtual void updateTDR(uint32_t valueTDR);
+    virtual void updateKND(uint32_t valueKND);
     void bind(Model* m)
     {
         model = m;

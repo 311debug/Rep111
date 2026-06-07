@@ -1,6 +1,7 @@
 #include <gui/screen1_screen/Screen1View.hpp>
 Screen1View* screen1ViewPtr = nullptr;
 extern volatile int g_duty_percent;
+extern volatile bool resetKND;
 //static Unicode::UnicodeChar textArea1Buffer[10];
 Screen1View::Screen1View()
 {
@@ -32,11 +33,28 @@ void Screen1View::updateGauge(int value)
 	           // Unicode::snprintf(textArea1Buffer, TEXTAREA1_SIZE, "%d", value);
 	       // textArea1.setTypedText('hgkj');
 	       // textArea1.invalidate();
-	    Unicode::snprintf(textArea1Buffer, TEXTAREA1_SIZE, "%d", value);
+	    Unicode::snprintf(textArea1Buffer, TEXTAREA1_SIZE, "%d",value);
 	        textArea1.setWildcard(textArea1Buffer);
 	        textArea1.resizeToCurrentText();   // пересчитать размер
 	        textArea1.invalidate();
+
 	}
+
+void Screen1View::updateTDR(uint32_t valueTDR) // частота
+{
+	Unicode::snprintf(textAreaTDRBuffer, TEXTAREATDR_SIZE, "%d", valueTDR);
+	textAreaTDR.setWildcard(textAreaTDRBuffer);
+	textAreaTDR.resizeToCurrentText();   // пересчитать размер
+	textAreaTDR.invalidate();
+}
+void Screen1View::updateKND(uint32_t valueKND) // Угол КНД
+{
+	Unicode::snprintf(textAreaKNDBuffer, TEXTAREAKND_SIZE, "%d", valueKND);
+		textAreaKND.setWildcard(textAreaKNDBuffer);
+		textAreaKND.resizeToCurrentText();   // пересчитать размер
+		textAreaKND.invalidate();
+}
+
 void Screen1View::function1()
 {
 	if (g_duty_percent+5 < 100)
@@ -51,3 +69,9 @@ void Screen1View::function2()
 	updateGauge(g_duty_percent);
 
 }
+
+void Screen1View::SetKND()
+    {
+	//__HAL_TIM_SET_COUNTER(&htim3, 15);
+	resetKND=true;
+    }

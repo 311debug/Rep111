@@ -332,10 +332,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
-    		int value;
+    	 int value;
                HAL_UART_Receive_IT(&huart2, &rx2Byte[0], 2); // получить
                g_duty_percent =(256*rx2Byte[1]+rx2Byte[0])/100; //скважность
-               value=50;//g_duty_percent;
+               value=g_duty_percent;
                osMessageQueuePut(dataQueueHandle, &value , 0, 0);
 
     }
