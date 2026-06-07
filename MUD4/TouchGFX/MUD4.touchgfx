@@ -36,7 +36,7 @@
             "Name": "textArea1",
             "X": 2,
             "Y": 174,
-            "Width": 165,
+            "Width": 130,
             "Height": 24,
             "TextId": "__SingleUse_7RVZ",
             "TextRotation": "0",
@@ -101,7 +101,7 @@
             "Name": "textAreaTDR",
             "X": 2,
             "Y": 198,
-            "Width": 59,
+            "Width": 68,
             "Height": 24,
             "TextId": "__SingleUse_6U1A",
             "TextRotation": "0",
@@ -121,7 +121,7 @@
             "Type": "TextArea",
             "Name": "textAreaKND",
             "Y": 222,
-            "Width": 64,
+            "Width": 73,
             "Height": 24,
             "TextId": "__SingleUse_01A6",
             "TextRotation": "0",
@@ -140,12 +140,12 @@
           {
             "Type": "ButtonWithLabel",
             "Name": "buttonSetKND",
-            "X": 130,
-            "Y": 209,
-            "Width": 110,
-            "Height": 50,
-            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_pressed.png",
-            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_50_tiny_rounded_normal.png",
+            "X": 140,
+            "Y": 234,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_active.png",
             "TextId": "__SingleUse_K3W4",
             "ReleasedColor": {
               "Red": 255,
@@ -158,7 +158,7 @@
               "Blue": 255
             },
             "TextRotation": "0",
-            "Preset": "alternate_theme\\presets\\button\\regular\\height_50\\tiny_rounded_normal.json"
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_36\\tiny_rounded_active.json"
           }
         ],
         "Interactions": [

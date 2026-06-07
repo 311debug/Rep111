@@ -16,10 +16,10 @@
         <Translation Language="GB">Уст. КНД</Translation>
       </Text>
       <Text Id="__SingleUse_01A6" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">КНД &lt;value&gt;</Translation>
+        <Translation Language="GB">КНД: &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_6U1A" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">ТДР &lt;value&gt;</Translation>
+        <Translation Language="GB">ТДР: &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_9ZH6" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">0</Translation>
@@ -31,7 +31,7 @@
         <Translation Language="GB">+5%</Translation>
       </Text>
       <Text Id="__SingleUse_7RVZ" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">Скважность &lt;value&gt;%</Translation>
+        <Translation Language="GB">Скважн: &lt;value&gt;%</Translation>
       </Text>
     </TextGroup>
   </Texts>
